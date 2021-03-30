@@ -124,6 +124,37 @@
           "address": "Vadodara"
         }
       ]
+    },
+    {
+      "id": 6,
+      "name": "Flipkart",
+      "email": "cust@flipkart.in",
+      "address": "India",
+      "totalEmployee": 1200,
+      "isCompanyActive": true,
+      "totalBranch": 2,
+      "companyBranch": [
+        {
+          "branchId": 1,
+          "branchName": "Flipkart Ahmedabad",
+          "address": "Ahmedabad"
+        },
+        {
+          "branchId": 2,
+          "branchName": "Flipkart Vadodara",
+          "address": "Vadodara"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Amazon",
+      "email": "cust@amazon.in",
+      "address": "India",
+      "totalEmployee": 15,
+      "isCompanyActive": true,
+      "totalBranch": 0,
+      "companyBranch": []
     }
   ]
 }

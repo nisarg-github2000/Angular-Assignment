@@ -70,10 +70,10 @@ export class AddCompanyComponent implements OnInit {
     if (!isExist) {
       this.companyService.addCompany(data).subscribe((resp: any) => {
         if (resp != null) {
-          this.toastr.success('Company has been added', 'Success');
+          this.alertService.successAlert('Success', 'Company has been added');
           this.getCompanyId();
         } else {
-          this.toastr.error('Company not added', 'Failed');
+          this.alertService.failureAlert('Failed', 'Company not added');
         }
         this.addForm.reset();
         this.submitted = false;
@@ -101,7 +101,7 @@ export class AddCompanyComponent implements OnInit {
             } else {
               this.alertService.successAlert(
                 'Add Branches!',
-                'You can add Branch by clicking Add branch button '
+                'You can add Branch by clicking Add branch button'
               );
             }
           });
@@ -118,7 +118,10 @@ export class AddCompanyComponent implements OnInit {
       let bName = this.branchesControl.branchName.value;
       let bAddress = this.branchesControl.address.value;
       this.branches.push({ branchId, branchName: bName, address: bAddress });
+      this.toastr.success('Branch added successfully', 'Branch Added');
       this.branchesForm.reset();
+      this.branchSubmitted = false;
+      this.addBranchVisible = false;
     }
   }
 
