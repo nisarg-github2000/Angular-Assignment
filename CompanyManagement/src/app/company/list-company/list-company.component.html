@@ -1,0 +1,78 @@
+<div class="row p-3 justify-content-end">
+    <a class="btn btn-primary btn-rounded" routerLink="/company/add" routerLinkActive="router-link-active">
+        <i class="fa fa-plus"></i> Add new Company
+    </a>
+</div>
+<table class="table table-borderless">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Total Employees</th>
+            <th>Address</th>
+            <th>isCompanyActive</th>
+            <th>Total Branch</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let company of companyList">
+            <tr>
+                <td>{{ company.id }}</td>
+                <td>{{ company.name }}</td>
+                <td>{{ company.email }}</td>
+                <td>{{ company.totalEmployee }}</td>
+                <td>{{ company.address}}</td>
+                <td>{{ company.isCompanyActive }}</td>
+                <td>
+                    <button type="button" class="btn btn-link text-info" (click)="addBranch(company)">
+                        <span class="fa fa-plus"></span>
+                    </button>
+                    <button type="button" class="btn btn-link"
+                        (click)="company.branchesVisible=!company.branchesVisible">
+                        {{ company.totalBranch }}
+                    </button>
+
+                </td>
+                <td>
+                    <a type="button" class="btn text-info" (click)="viewCompany(company.id)">
+                        <i class="fa fa-eye"></i>
+                    </a>
+                    <button type="button" class="btn btn-link text-success" (click)="updateCompany(company)">
+                        <i class="fa fa-edit"></i>
+                    </button>
+                    <button class="btn btn-link text-danger" (click)="deleteCompany(company.id)">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+            <tr *ngIf="company.branchesVisible" class="mb-2">
+                <td colspan="8">
+                    <table class="w-100">
+                        <tr>
+                            <th>Branch Id</th>
+                            <th>Branch Name</th>
+                            <th>Address</th>
+                            <th>Actions</th>
+                        </tr>
+                        <tr *ngFor="let branch of company.companyBranch;">
+                            <td>{{branch.branchId}}</td>
+                            <td>{{branch.branchName}}</td>
+                            <td>{{branch.address}}</td>
+                            <td>
+                                <button class="btn btn-link" (click)="updateBranch(company,branch)">
+                                    <span class="fa fa-edit"></span>
+                                </button>
+                                <button class="btn btn-link text-danger" (click)="deleteBranch(company,branch)">
+                                    <span class="fa fa-trash"></span>
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </ng-container>
+    </tbody>
+
+</table>

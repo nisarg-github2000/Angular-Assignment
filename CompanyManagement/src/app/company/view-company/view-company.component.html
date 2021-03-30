@@ -1,0 +1,71 @@
+<h2>Company Details</h2>
+<div class="container-fluid">
+    <div class="row justify-content-end">
+        <a class="btn btn-link" routerLink="/">
+            <span class="fa fa-arrow-left"></span> Back to list
+        </a>
+
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <table class="table table-borderless">
+                <tr>
+                    <th>Id</th>
+                    <td>{{company.id}}</td>
+                </tr>
+                <tr>
+                    <th>Name</th>
+                    <td>{{company.name}}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{company.email}}</td>
+                </tr>
+                <tr>
+                    <th>Address</th>
+                    <td>{{company.address}}</td>
+                </tr>
+                <tr>
+                    <th>Total Employee:</th>
+                    <td>{{company.totalEmployee}}</td>
+                </tr>
+                <tr>
+                    <th>Total Branches:</th>
+                    <td>{{company.totalBranch}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-1" style="border-right: 3px solid #343a40;"></div>
+
+
+        <div class="col-7">
+            <h3>Branch Details</h3>
+            <div class="row p-2">
+                <ng-container *ngFor="let branch of company.companyBranch">
+                    <div class="col-5">
+                        <hr>
+                        <table class="table table-borderless">
+                            <tr>
+                                <th>BranchId</th>
+                                <td>{{branch.branchId}}</td>
+                            </tr>
+                            <tr>
+                                <th>Branch Name</th>
+                                <td>{{branch.branchName}}</td>
+                            </tr>
+                            <tr>
+                                <th>Address</th>
+                                <td>{{branch.address}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-1" style="border-right: 3px solid #343a40;"></div>
+
+                </ng-container>
+            </div>
+        </div>
+        <!-- <div class="col-1" style="border-left: 3px solid #343a40;"></div> -->
+
+
+    </div>
+</div>

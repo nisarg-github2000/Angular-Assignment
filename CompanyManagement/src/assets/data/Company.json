@@ -1,0 +1,108 @@
+{
+  "companies": [
+    {
+      "name": "D-Mart",
+      "email": "customerservice@dmart.in",
+      "address": "India",
+      "totalEmployee": "1880",
+      "totalBranch": 4,
+      "isCompanyActive": "false",
+      "id": "1",
+      "companyBranch": [
+        {
+          "branchId": "1",
+          "branchName": "D-Mart Ahmedabad",
+          "address": "Ahmedabad"
+        },
+        {
+          "branchId": "2",
+          "branchName": "D-Mart Anand",
+          "address": "Anand"
+        },
+        {
+          "branchId": "3",
+          "branchName": "D-Mart Nadiad",
+          "address": "Nadiad"
+        },
+        {
+          "branchId": 4,
+          "branchName": "D-Mart Bodakdev",
+          "address": "Bodakdev, Ahmedabad"
+        }
+      ]
+    },
+    {
+      "name": "Reliance Fresh",
+      "email": "customerservice@relaincefresh.in",
+      "address": "India",
+      "totalEmployee": "2000",
+      "totalBranch": "3",
+      "isCompanyActive": true,
+      "id": "2",
+      "companyBranch": [
+        {
+          "branchId": "1",
+          "branchName": "Reliance Fresh Ahmedabad",
+          "address": "Ahmedabad"
+        },
+        {
+          "branchId": "2",
+          "branchName": "Reliance Fresh Anand",
+          "address": "Anand"
+        },
+        {
+          "branchId": "3",
+          "branchName": "Reliance Fresh Nadiad",
+          "address": "Nadiad"
+        }
+      ]
+    },
+    {
+      "name": "Big Bazaar",
+      "email": "customer@bigbazaar.in",
+      "address": "India",
+      "totalEmployee": "1200",
+      "totalBranch": 3,
+      "isCompanyActive": "true",
+      "id": "3",
+      "companyBranch": [
+        {
+          "branchId": "1",
+          "branchName": "Big Bazaar Anand",
+          "address": "Anand"
+        },
+        {
+          "branchId": "2",
+          "branchName": "Big Bazaar Vadodara",
+          "address": "Vadodara"
+        },
+        {
+          "branchId": "3",
+          "branchName": "Big Bazaar Surat",
+          "address": "Surat"
+        }
+      ]
+    },
+    {
+      "name": "Zomato",
+      "email": "customer@zomato.in",
+      "address": "India",
+      "totalEmployee": "1300",
+      "totalBranch": 2,
+      "isCompanyActive": "true",
+      "id": "4",
+      "companyBranch": [
+        {
+          "branchId": "1",
+          "branchName": "Zomato Nadiad",
+          "address": "Nadiad"
+        },
+        {
+          "branchId": "2",
+          "branchName": "Zomato Anand",
+          "address": "Anand"
+        }
+      ]
+    }
+  ]
+}
