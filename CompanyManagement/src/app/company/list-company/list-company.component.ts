@@ -97,11 +97,14 @@ export class ListCompanyComponent implements OnInit, OnDestroy {
       )
       .then((result) => {
         if (result.isConfirmed) {
+          console.log(company);
           let index = company.companyBranch.indexOf(branch);
           company.companyBranch.splice(index, 1);
           company.totalBranch -= 1;
+          delete company.branchesVisible;
           this.companyService.updateCompany(company).subscribe((resp: any) => {
             if (resp) {
+              this.fetchData();
               this.alertService.successAlert(
                 'Deleted!',
                 'Branch deleted successfully'

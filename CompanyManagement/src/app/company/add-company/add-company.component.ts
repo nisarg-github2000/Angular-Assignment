@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { BrachDetails } from '../../models/company-model';
+import { BrachDetails, CompanyModel } from '../../models/company-model';
 import { AlertService } from '../../services/AlertService/alert.service';
 import { CompanyManagementService } from '../../services/CompanyManagement/company-management.service';
 
@@ -27,12 +27,12 @@ export class AddCompanyComponent implements OnInit {
     private toastr: ToastrService
   ) {
     this.addForm = this.builder.group({
-      id: ['', Validators.required],
+      id: [{ value: '', disabled: true }],
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       address: ['', Validators.required],
       totalEmployee: ['', [Validators.required, Validators.min(0)]],
-      isCompanyActive: [0, [Validators.required]],
+      isCompanyActive: [true, [Validators.required]],
     });
 
     this.branchesForm = this.builder.group({
@@ -40,14 +40,17 @@ export class AddCompanyComponent implements OnInit {
       branchName: ['', Validators.required],
       address: ['', Validators.required],
     });
-
-    this.companyService.getId().then((id: number) => {
-      this.id = id;
-    });
   }
 
   ngOnInit(): void {
-    this.addForm.patchValue({ id: this.id });
+    this.getCompanyId();
+  }
+
+  getCompanyId() {
+    this.companyService.getId().then((id: number) => {
+      this.id = id;
+      this.addForm.patchValue({ id: this.id });
+    });
   }
 
   get f() {
@@ -58,19 +61,29 @@ export class AddCompanyComponent implements OnInit {
     return this.branchesForm.controls;
   }
 
-  addCompany() {
-    let data = JSON.parse(JSON.stringify(this.addForm.value));
+  async addCompany() {
+    let data = JSON.parse(JSON.stringify(this.addForm.getRawValue()));
     data.totalBranch = this.branches.length;
     data.companyBranch = this.branches;
+    let isExist = await this.companyService.ifCompanyExist(data);
 
-    this.companyService.addCompany(data).subscribe((resp: any) => {
-      console.log(resp);
-      if (resp != null) {
-        this.toastr.success('Company has been added', 'Success');
-      } else {
-        this.toastr.error('Company not added', 'Failed');
-      }
-    });
+    if (!isExist) {
+      this.companyService.addCompany(data).subscribe((resp: any) => {
+        if (resp != null) {
+          this.toastr.success('Company has been added', 'Success');
+          this.getCompanyId();
+        } else {
+          this.toastr.error('Company not added', 'Failed');
+        }
+        this.addForm.reset();
+        this.submitted = false;
+      });
+    } else {
+      this.alertService.failureAlert(
+        'Already Exist',
+        `Company with name ${data.name.toLowerCase()} already exist`
+      );
+    }
   }
 
   onSubmit() {

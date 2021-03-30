@@ -5,7 +5,8 @@ import { AddCompanyComponent } from './company/add-company/add-company.component
 import { ViewCompanyComponent } from './company/view-company/view-company.component';
 
 const routes: Routes = [
-  { path: '', component: ListCompanyComponent },
+  { path: '', redirectTo: 'company', pathMatch: 'full' },
+  { path: 'company', component: ListCompanyComponent },
   { path: 'company/add', component: AddCompanyComponent },
   { path: 'company/view/:id', component: ViewCompanyComponent },
 ];

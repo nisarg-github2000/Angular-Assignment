@@ -28,7 +28,7 @@ export class AddBranchComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) data: CompanyModel
   ) {
     this.branchesForm = this.builder.group({
-      branchId: ['', Validators.required],
+      branchId: [{ value: '', disabled: true }, Validators.required],
       branchName: ['', Validators.required],
       address: ['', Validators.required],
     });
@@ -55,24 +55,43 @@ export class AddBranchComponent implements OnInit {
   onBranchSubmit() {
     this.branchSubmitted = true;
     if (this.branchesForm.valid) {
-      let data = JSON.parse(JSON.stringify(this.branchesForm.value));
+      let data = JSON.parse(
+        JSON.stringify(this.branchesForm.getRawValue())
+      ) as BrachDetails;
+      let isExist = this.ifBranchExist(data);
       console.log(data);
-      this.company.companyBranch.push(data);
-      this.company.totalBranch = this.company.companyBranch.length;
-      this.companyService.updateCompany(this.company).subscribe((resp: any) => {
-        if (resp) {
-          this.toastr.success('Branch added successfully', 'Success!');
-          this.dialogRef.close({ success: true });
-        } else {
-          this.toastr.error('Operation Failed', 'Failed!');
-          this.closeDialog();
-        }
-      });
-      this.branchesForm.reset();
+      if (!isExist) {
+        this.company.companyBranch.push(data);
+        this.company.totalBranch = this.company.companyBranch.length;
+
+        this.companyService
+          .updateCompany(this.company)
+          .subscribe((resp: any) => {
+            if (resp) {
+              this.toastr.success('Branch added successfully', 'Success!');
+              this.dialogRef.close({ success: true });
+            } else {
+              this.toastr.error('Operation Failed', 'Failed!');
+              this.closeDialog();
+            }
+          });
+      } else {
+        this.alertService.failureAlert('Already Exist', 'Branch already exist');
+      }
+      this.branchesForm.reset({ branchName: '', address: '' });
     }
   }
 
   closeDialog() {
     this.dialogRef.close({ success: false });
+  }
+
+  ifBranchExist(data: BrachDetails): boolean {
+    let isExist = this.company.companyBranch.filter(
+      (ele) =>
+        ele.address.toLowerCase() == data.address.toLowerCase() &&
+        ele.branchName.toLowerCase() == data.branchName.toLowerCase()
+    );
+    return isExist.length > 0;
   }
 }

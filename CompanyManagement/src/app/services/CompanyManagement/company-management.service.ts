@@ -20,8 +20,6 @@ export class CompanyManagementService {
         .subscribe((resp: CompanyModel[]) => {
           resp.map((ele) => {
             ele.id = parseInt('' + ele.id);
-            console.log(ele);
-
             if (ele.id > maxId) {
               maxId = ele.id;
             }
@@ -43,10 +41,12 @@ export class CompanyManagementService {
   }
 
   addCompany(company: CompanyModel) {
+    delete company.branchesVisible;
     return this.http.post(this.url, company).pipe(catchError(this.handleError));
   }
 
   updateCompany(company: CompanyModel) {
+    delete company.branchesVisible;
     return this.http
       .put(`${this.url}/${company.id}`, company)
       .pipe(catchError(this.handleError));
@@ -68,5 +68,17 @@ export class CompanyManagementService {
     }
 
     return throwError('Something bad happened; please try again later.');
+  }
+
+  ifCompanyExist(company: CompanyModel): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      let result;
+      this.getAllCompanies().subscribe((list) => {
+        result = list.filter(
+          (ele) => ele.name.toLowerCase() == company.name.toLowerCase()
+        );
+        return resolve(result.length > 0);
+      });
+    });
   }
 }

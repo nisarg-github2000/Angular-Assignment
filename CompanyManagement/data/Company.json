@@ -4,20 +4,15 @@
       "name": "D-Mart",
       "email": "customerservice@dmart.in",
       "address": "India",
-      "totalEmployee": "1880",
+      "totalEmployee": "2000",
       "totalBranch": 4,
       "isCompanyActive": "false",
       "id": "1",
       "companyBranch": [
         {
-          "branchId": "1",
           "branchName": "D-Mart Ahmedabad",
-          "address": "Ahmedabad"
-        },
-        {
-          "branchId": "2",
-          "branchName": "D-Mart Anand",
-          "address": "Anand"
+          "address": "Ahmedabad",
+          "branchId": "1"
         },
         {
           "branchId": "3",
@@ -25,9 +20,14 @@
           "address": "Nadiad"
         },
         {
-          "branchId": 4,
+          "branchName": "D-Mart Sarkhej",
+          "address": "Sarkhej, Ahmedabad",
+          "branchId": 4
+        },
+        {
+          "branchId": 5,
           "branchName": "D-Mart Bodakdev",
-          "address": "Bodakdev, Ahmedabad"
+          "address": "Ahmedabad"
         }
       ]
     },
@@ -36,7 +36,7 @@
       "email": "customerservice@relaincefresh.in",
       "address": "India",
       "totalEmployee": "2000",
-      "totalBranch": "3",
+      "totalBranch": 3,
       "isCompanyActive": true,
       "id": "2",
       "companyBranch": [
@@ -101,6 +101,27 @@
           "branchId": "2",
           "branchName": "Zomato Anand",
           "address": "Anand"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Big Mart",
+      "email": "cust@bmart.in",
+      "address": "India",
+      "totalEmployee": 1250,
+      "isCompanyActive": true,
+      "totalBranch": 2,
+      "companyBranch": [
+        {
+          "branchName": "Big Mart Bodakdev",
+          "address": "Ahmedabad",
+          "branchId": 1
+        },
+        {
+          "branchId": 2,
+          "branchName": "Big mart Vadodara",
+          "address": "Vadodara"
         }
       ]
     }

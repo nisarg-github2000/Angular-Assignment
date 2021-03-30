@@ -13,7 +13,7 @@
             <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
                     <label>Company Id:</label>
-                    <input type="text" formControlName="id" class="form-control" disabled [value]="id">
+                    <input type="text" formControlName="id" class="form-control" [value]="id">
                 </div>
                 <div class="form-group">
                     <label>Company Name:</label>
@@ -45,7 +45,7 @@
 
                 <div class="form-group">
                     <label>Total Employees:</label>
-                    <input type="text" formControlName="totalEmployee" class="form-control"
+                    <input type="number" formControlName="totalEmployee" class="form-control"
                         [ngClass]="{'is-invalid':(submitted || f.totalEmployee.touched) && f.totalEmployee.errors}">
                     <div class="invalid-feedback" *ngIf="f.totalEmployee.errors">
                         <div *ngIf="f.totalEmployee.errors.required">field is required</div>
